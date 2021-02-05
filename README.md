@@ -1,8 +1,9 @@
-﻿# excel for golang
+﻿# GoExcel
 
-read and write excel files in golang.
+Manipulate excel files using all the features of golang
 
-go语言读写excel文件.
+Fork from [github.com/maxim-morozenko/excel]
+
 
 # dependency
 
@@ -10,7 +11,7 @@ go语言读写excel文件.
 
 # install
 
-go get github.com/aswjh/excel
+go get github.com/MarcoVela/goexcel
 
 # example
 ``` go
@@ -20,16 +21,16 @@ import (
 	"runtime"
 	"fmt"
 	"time"
-	"github.com/aswjh/excel"
+	"github.com/MarcoVela/goexcel"
 )
 
 func main() {
 	runtime.GOMAXPROCS(1)
 	option := excel.Option{"Visible": true, "DisplayAlerts": true, "ScreenUpdating": true}
-	xl, _ := excel.New(option)      //xl, _ := excel.Open("test_excel.xls", option)
+	xl, _ := excel.New(option)
 	defer xl.Quit()
 
-	sheet, _ := xl.Sheet(1)         //xl.Sheet("sheet1")
+	sheet, _ := xl.Sheet(1)
 	defer sheet.Release()
 	sheet.Cells(1, 1, "hello")
 	sheet.PutCell(1, 2, 2006)

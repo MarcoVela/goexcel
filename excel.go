@@ -60,7 +60,10 @@ type VARIANT struct {
 //
 func Initialize(opt... Option) (mso *MSO) {
     ole.CoInitialize(0)
-    app, _ := oleutil.CreateObject("Excel.Application")
+	app, _ := oleutil.GetActiveObject("Excel.Application")
+	if app == nil {
+		app, _ = oleutil.CreateObject("Excel.Application")
+	}
     excel, _ := app.QueryInterface(ole.IID_IDispatch)
     wbs := oleutil.MustGetProperty(excel, "WorkBooks").ToIDispatch()
     ver, _ := strconv.ParseFloat(oleutil.MustGetProperty(excel, "Version").ToString(), 64)
